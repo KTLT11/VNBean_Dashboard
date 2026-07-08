@@ -1,4 +1,4 @@
-import { Bar, BarChart, CartesianGrid, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import Badge from "../components/Badge";
 import ChartCard from "../components/ChartCard";
 import DataTable from "../components/DataTable";
@@ -22,14 +22,16 @@ export default function BranchPerformance({ data }) {
         subtitle="Xếp hạng doanh thu, chi phí và chất lượng vận hành theo từng chi nhánh."
       />
 
-      <ChartCard title="Ranking 15 chi nhánh theo doanh thu trung bình">
+      <ChartCard
+        title="Ranking 15 chi nhánh theo doanh thu trung bình"
+        subtitle={`Mức trung bình toàn chuỗi hiện là ${formatCurrency(chainAverage)}.`}
+      >
         <ResponsiveContainer width="100%" height={440}>
           <BarChart data={top15} layout="vertical" margin={{ top: 12, right: 36, left: 24, bottom: 8 }}>
             <CartesianGrid stroke={colors.border} horizontal={false} strokeDasharray="4 4" />
             <XAxis type="number" tick={{ fill: colors.textSecondary, fontSize: 12 }} axisLine={false} tickLine={false} />
             <YAxis dataKey="MaNhanh" type="category" tick={{ fill: colors.textSecondary, fontSize: 12 }} axisLine={false} tickLine={false} width={56} />
             <Tooltip {...tooltipStyle} formatter={(value) => formatCurrency(value)} />
-            <ReferenceLine x={chainAverage} stroke={colors.pink} strokeDasharray="5 5" label={{ value: "TB chuỗi", fill: colors.pink, fontSize: 12 }} />
             <Bar
               dataKey="DoanhThu_TB"
               radius={[0, 12, 12, 0]}
@@ -52,7 +54,11 @@ export default function BranchPerformance({ data }) {
               { key: "DoanhThu_TB", label: "Doanh thu TB", render: (row) => formatCurrency(row.DoanhThu_TB) },
               { key: "ChiPhi_TB", label: "Chi phí TB", render: (row) => formatCurrency(row.ChiPhi_TB) },
               { key: "HaiLong_TB", label: "Hài lòng TB", render: (row) => formatNumber(row.HaiLong_TB, 2) },
-              { key: "TrangThai", label: "Trạng thái", render: (row) => <Badge tone={row.TrangThai === "Vượt trung bình" ? "success" : "danger"}>{row.TrangThai}</Badge> },
+              {
+                key: "TrangThai",
+                label: "Trạng thái",
+                render: (row) => <Badge tone={row.TrangThai === "Vượt trung bình" ? "success" : "danger"}>{row.TrangThai}</Badge>,
+              },
             ]}
             rows={ranking}
           />
@@ -60,7 +66,7 @@ export default function BranchPerformance({ data }) {
 
         <InsightBox
           items={[
-            `${top?.MaNhanh} là nhóm nên học hỏi/nhân rộng với doanh thu TB ${formatCurrency(top?.DoanhThu_TB)}.`,
+            `${top?.MaNhanh} là nhóm nên học hỏi và nhân rộng với doanh thu TB ${formatCurrency(top?.DoanhThu_TB)}.`,
             `${bottom?.MaNhanh} là cảnh báo doanh thu thấp, cần xem lại chi phí, lưu lượng và chất lượng dịch vụ.`,
             `Mức trung bình toàn chuỗi là ${formatCurrency(chainAverage)}; các chi nhánh dưới ngưỡng cần kế hoạch cải thiện riêng.`,
           ]}
