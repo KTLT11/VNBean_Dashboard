@@ -6,9 +6,10 @@ export const average = (items, key) => {
 };
 
 export const formatNumber = (value, digits = 1) =>
-  new Intl.NumberFormat("vi-VN", {
+  new Intl.NumberFormat("en-US", {
     maximumFractionDigits: digits,
     minimumFractionDigits: digits,
+    useGrouping: false,
   }).format(Number(value || 0));
 
 export const formatCurrency = (value, digits = 1) => `${formatNumber(value, digits)} triệu`;

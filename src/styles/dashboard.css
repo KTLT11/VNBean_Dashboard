@@ -87,9 +87,19 @@
 }
 
 .sidebar nav button.active {
-  color: #fff;
+  color: #fff !important;
   background: var(--primary);
   box-shadow: 0 12px 24px rgba(93, 124, 244, 0.28);
+}
+
+.sidebar nav button.active span,
+.sidebar nav button.active svg {
+  color: #fff !important;
+  stroke: #fff !important;
+}
+
+.sidebar nav button.active * {
+  color: #fff !important;
 }
 
 .filter-panel label {
@@ -207,6 +217,7 @@
 
 .content-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
 }
 
 .content-grid--wide {
@@ -308,6 +319,9 @@
 }
 
 .insight-box {
+  width: min(100%, 420px);
+  justify-self: start;
+  align-self: start;
   background: var(--card-secondary);
   border-left: 5px solid var(--primary);
 }
@@ -342,6 +356,18 @@
   overflow: auto;
   border: 1px solid var(--border);
   border-radius: 16px;
+}
+
+.table-wrap--vertical th:first-child {
+  min-width: 160px;
+}
+
+.table-wrap--vertical tbody th {
+  color: var(--text-secondary);
+  background: var(--card-secondary);
+  font-size: 12px;
+  text-transform: uppercase;
+  white-space: nowrap;
 }
 
 th,
@@ -467,6 +493,7 @@ tr:last-child td {
 }
 
 .chat-message {
+  width: fit-content;
   max-width: 82%;
   padding: 12px 14px;
   border-radius: 16px;
@@ -480,6 +507,11 @@ tr:last-child td {
   background: var(--primary);
 }
 
+.chat-message--user span,
+.chat-message--user p {
+  color: #fff;
+}
+
 .chat-message span {
   display: block;
   margin-bottom: 6px;
@@ -489,8 +521,10 @@ tr:last-child td {
 }
 
 .chat-message p {
+  margin: 0;
   line-height: 1.5;
   white-space: pre-wrap;
+  overflow-wrap: anywhere;
 }
 
 .chat-input {

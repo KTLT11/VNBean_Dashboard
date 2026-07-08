@@ -51,8 +51,10 @@ export default function AreaPerformance({ data }) {
       <div className="content-grid content-grid--wide">
         <ChartCard title="Bảng tổng hợp khu vực">
           <DataTable
+            layout="vertical"
+            rowLabelKey="Khu_vuc"
+            rowLabelHeader="Chỉ số"
             columns={[
-              { key: "Khu_vuc", label: "Khu vực" },
               { key: "TongDoanhThu", label: "Tổng doanh thu", render: (row) => formatCurrency(row.TongDoanhThu) },
               { key: "DoanhThuTB", label: "Doanh thu TB", render: (row) => formatCurrency(row.DoanhThuTB) },
               { key: "ChiPhiTB", label: "Chi phí TB", render: (row) => formatCurrency(row.ChiPhiTB) },
