@@ -512,11 +512,6 @@ tr:last-child td {
   background: var(--primary);
 }
 
-.chat-history__end {
-  width: 1px;
-  height: 1px;
-}
-
 .chat-message--user span,
 .chat-message--user p {
   color: #fff;

@@ -2,22 +2,27 @@ import { useEffect, useRef } from "react";
 import { Send } from "lucide-react";
 
 export default function ChatWindow({ messages, input, onInputChange, onSubmit, loading }) {
-  const endRef = useRef(null);
+  const historyRef = useRef(null);
 
   useEffect(() => {
-    endRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
+    const history = historyRef.current;
+    if (!history) return;
+
+    history.scrollTo({
+      top: history.scrollHeight,
+      behavior: "smooth",
+    });
   }, [messages]);
 
   return (
     <div className="chat-window">
-      <div className="chat-history">
+      <div ref={historyRef} className="chat-history">
         {messages.map((message, index) => (
           <div key={`${message.role}-${index}`} className={`chat-message chat-message--${message.role}`}>
             <span>{message.role === "user" ? "Bạn" : "VNBean AI"}</span>
             <p>{message.text}</p>
           </div>
         ))}
-        <div ref={endRef} className="chat-history__end" />
       </div>
       <form className="chat-input" onSubmit={onSubmit}>
         <input
