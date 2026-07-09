@@ -19,6 +19,7 @@ export default function ChatbotPage({ data, filteredData }) {
   const ask = async (question) => {
     const clean = question.trim();
     if (!clean) return;
+
     setMessages((current) => [...current, { role: "user", text: clean }]);
     setInput("");
     setLoading(true);
@@ -58,8 +59,12 @@ export default function ChatbotPage({ data, filteredData }) {
       <div className="content-grid content-grid--wide">
         <ChartCard title="Trợ lý phân tích VNBean" subtitle="API key Groq chỉ được đọc ở backend qua biến môi trường GROQ_API_KEY.">
           <div className="chat-controls">
-            <button className={scope === "filtered" ? "selected" : ""} onClick={() => setScope("filtered")} type="button">Dữ liệu sau filter</button>
-            <button className={scope === "all" ? "selected" : ""} onClick={() => setScope("all")} type="button">Toàn bộ dữ liệu</button>
+            <button className={scope === "filtered" ? "selected" : ""} onClick={() => setScope("filtered")} type="button">
+              Dữ liệu sau filter
+            </button>
+            <button className={scope === "all" ? "selected" : ""} onClick={() => setScope("all")} type="button">
+              Toàn bộ dữ liệu
+            </button>
           </div>
           <ChatWindow
             messages={messages}

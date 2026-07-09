@@ -1,6 +1,13 @@
+import { useEffect, useRef } from "react";
 import { Send } from "lucide-react";
 
 export default function ChatWindow({ messages, input, onInputChange, onSubmit, loading }) {
+  const endRef = useRef(null);
+
+  useEffect(() => {
+    endRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
+  }, [messages]);
+
   return (
     <div className="chat-window">
       <div className="chat-history">
@@ -10,6 +17,7 @@ export default function ChatWindow({ messages, input, onInputChange, onSubmit, l
             <p>{message.text}</p>
           </div>
         ))}
+        <div ref={endRef} className="chat-history__end" />
       </div>
       <form className="chat-input" onSubmit={onSubmit}>
         <input

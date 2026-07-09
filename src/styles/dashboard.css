@@ -484,6 +484,9 @@ tr:last-child td {
 
 .chat-history {
   display: grid;
+  align-content: start;
+  align-items: start;
+  justify-items: start;
   gap: 12px;
   height: 420px;
   overflow: auto;
@@ -493,6 +496,7 @@ tr:last-child td {
 }
 
 .chat-message {
+  align-self: start;
   width: fit-content;
   max-width: 82%;
   padding: 12px 14px;
@@ -502,9 +506,15 @@ tr:last-child td {
 }
 
 .chat-message--user {
+  align-self: start;
   justify-self: end;
   color: white;
   background: var(--primary);
+}
+
+.chat-history__end {
+  width: 1px;
+  height: 1px;
 }
 
 .chat-message--user span,
