@@ -119,10 +119,44 @@
   border-radius: 16px;
 }
 
-.filter-group__header {
+.filter-group__toggle {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--text-primary);
+}
+
+.filter-group__summary {
+  display: grid;
+  gap: 3px;
+  text-align: left;
+}
+
+.filter-group__summary span {
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.filter-group__summary small {
+  color: var(--text-muted);
+  font-size: 11px;
+}
+
+.filter-group__body {
+  display: grid;
+  gap: 10px;
+}
+
+.filter-group__header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
   gap: 10px;
 }
 
