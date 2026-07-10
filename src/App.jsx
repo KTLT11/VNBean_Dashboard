@@ -11,16 +11,20 @@ import { loadVNBeanData } from "./utils/loadData";
 import { getFilterOptions, getLatestQuarter } from "./utils/metrics";
 
 const defaultFilters = {
-  quarter: "all",
-  area: "all",
-  branch: "all",
+  quarters: [],
+  areas: [],
+  branches: [],
 };
+
+function includesOrAll(selectedValues, value) {
+  return selectedValues.length === 0 || selectedValues.includes(value);
+}
 
 function applyFilters(data, filters) {
   return data.filter((row) => {
-    const quarterOk = filters.quarter === "all" || row.Quy === filters.quarter;
-    const areaOk = filters.area === "all" || row.Khu_vuc === filters.area;
-    const branchOk = filters.branch === "all" || row.MaNhanh === filters.branch;
+    const quarterOk = includesOrAll(filters.quarters, row.Quy);
+    const areaOk = includesOrAll(filters.areas, row.Khu_vuc);
+    const branchOk = includesOrAll(filters.branches, row.MaNhanh);
     return quarterOk && areaOk && branchOk;
   });
 }

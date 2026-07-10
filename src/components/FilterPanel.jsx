@@ -1,35 +1,66 @@
+function FilterGroup({ label, values, selectedValues, onToggle }) {
+  return (
+    <section className="filter-group">
+      <div className="filter-group__header">
+        <span>{label}</span>
+        <button type="button" className={selectedValues.length === 0 ? "selected" : ""} onClick={() => onToggle(null)}>
+          Tất cả
+        </button>
+      </div>
+      <div className="filter-group__options">
+        {values.map((value) => {
+          const selected = selectedValues.includes(value);
+          return (
+            <button
+              key={value}
+              type="button"
+              className={selected ? "selected" : ""}
+              onClick={() => onToggle(value)}
+            >
+              {value}
+            </button>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
+
 export default function FilterPanel({ filters, options, onChange }) {
-  const update = (key, value) => onChange({ ...filters, [key]: value });
+  const toggleSelection = (key, value) => {
+    if (value === null) {
+      onChange({ ...filters, [key]: [] });
+      return;
+    }
+
+    const currentValues = filters[key];
+    const nextValues = currentValues.includes(value)
+      ? currentValues.filter((item) => item !== value)
+      : [...currentValues, value];
+
+    onChange({ ...filters, [key]: nextValues });
+  };
 
   return (
     <div className="filter-panel">
-      <label>
-        <span>Chọn quý</span>
-        <select value={filters.quarter} onChange={(event) => update("quarter", event.target.value)}>
-          <option value="all">Tất cả quý</option>
-          {options.quarters.map((quarter) => (
-            <option key={quarter} value={quarter}>{quarter}</option>
-          ))}
-        </select>
-      </label>
-      <label>
-        <span>Chọn khu vực</span>
-        <select value={filters.area} onChange={(event) => update("area", event.target.value)}>
-          <option value="all">Tất cả khu vực</option>
-          {options.areas.map((area) => (
-            <option key={area} value={area}>{area}</option>
-          ))}
-        </select>
-      </label>
-      <label>
-        <span>Chọn chi nhánh</span>
-        <select value={filters.branch} onChange={(event) => update("branch", event.target.value)}>
-          <option value="all">Tất cả chi nhánh</option>
-          {options.branches.map((branch) => (
-            <option key={branch} value={branch}>{branch}</option>
-          ))}
-        </select>
-      </label>
+      <FilterGroup
+        label="Chọn quý"
+        values={options.quarters}
+        selectedValues={filters.quarters}
+        onToggle={(value) => toggleSelection("quarters", value)}
+      />
+      <FilterGroup
+        label="Chọn khu vực"
+        values={options.areas}
+        selectedValues={filters.areas}
+        onToggle={(value) => toggleSelection("areas", value)}
+      />
+      <FilterGroup
+        label="Chọn chi nhánh"
+        values={options.branches}
+        selectedValues={filters.branches}
+        onToggle={(value) => toggleSelection("branches", value)}
+      />
     </div>
   );
 }

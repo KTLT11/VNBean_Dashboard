@@ -110,6 +110,52 @@
   font-weight: 700;
 }
 
+.filter-group {
+  display: grid;
+  gap: 10px;
+  padding: 12px;
+  background: var(--card-secondary);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+}
+
+.filter-group__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.filter-group__header span {
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.filter-group__header button,
+.filter-group__options button {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: white;
+  color: var(--text-secondary);
+  padding: 7px 12px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.filter-group__options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.filter-group__header button.selected,
+.filter-group__options button.selected {
+  color: white;
+  background: var(--primary);
+  border-color: var(--primary);
+}
+
 .filter-panel select,
 .forecast-input input,
 .chat-input input {
@@ -587,7 +633,7 @@ tr:last-child td {
   }
 
   .filter-panel {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: 1fr;
   }
 
   .metric-grid--five {
